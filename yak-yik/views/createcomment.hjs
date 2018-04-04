@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <h1>Create Comment</h1>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    
+   <form action="/api/comment" method="post">
+   		<input type="text" name="username" placeholder="UserName" /><br/ >
+   		<input type="text" name="body" placeholder="Body" /> <br />
+   		<input type="submit" value="Create Comment" />
+   </form>
+  </body>
+</html>

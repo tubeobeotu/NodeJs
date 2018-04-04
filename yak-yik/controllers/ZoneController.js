@@ -21,13 +21,41 @@ module.exports = {
 			callback(null, zone)
 		})
 	},
-	update: function () {
-		// body...
+	create: function (params, callback) {
+		var zips = params['zipCodes']
+		var zip = zips.split(',')
+		var newZips = []
+		zip.forEach(function (zipCode) {
+			newZips.push(zipCode.trim())
+		})
+
+		params['zipCodes'] = newZips
+
+		Zone.create(params, function (err, zone) {
+			if (err){
+				callback(err, null)
+				return
+			}
+
+			callback(null, zone)
+		})
 	},
-	create: function () {
-		// body...
+	update: function (id, params, callback) {
+		Zone.findByIdAndUpdate(id, params, {new:true}, function(err, zone){
+			if(err){
+				callback(err, null)
+				return
+			}
+			callback(null, zone)
+		})
 	},
-	destroy: function () {
-		// body...
+	delete: function () {
+		Zone.findByIdAndRemove(id, function(err){
+			if(err){
+				callback(err, null)
+				return
+			}
+			callback(null, null)
+		})
 	}
 }
