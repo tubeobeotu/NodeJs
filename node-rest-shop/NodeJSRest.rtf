@@ -1,0 +1,63 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16400\viewh8320\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 S\uc0\u417  l\u432 \u7907 c nh\u7919 ng vi\u7879 c s\u7869  l\'e0m:\
+\
+/products: \
+GET => l\uc0\u7845 y ra danh s\'e1ch products\
+POST => th\'eam m\uc0\u7899 i products\
+\
+/products/\{id\}\
+GET => l\uc0\u7845 y th\'f4ng tin products\
+PATCH => thay \uc0\u273 \u7893 i c\u7853 p nh\u7853 t products\
+DELETE\
+\
+/orders\
+GET => l\uc0\u7845 y th\'f4ng tin orders\
+POST => t\uc0\u7841 o m\u7899 i orders\
+\
+/orders/\{id\}\
+GET => L\uc0\u7845 y gi\u7889 ng tin chi ti\u7871 t c\u7911 a order\
+PATCH => kh\'f4ng c\'f3 v\'ec ch\'fang ta k th\uc0\u7875  ch\u7881 nh s\u7917 a nh\u7919 ng order \u273 \'e3 t\u7841 o\
+DELETE \
+\
+V\'e0 v\'ec 1 s\uc0\u7889  v\u7845 n \u273 \u7873  b\u7843 o m\u7853 t \u273 \u7889 i v\u7899 i 1 s\u7889  APIs th\'ec ch\'fang ta s\u7869  l\'e0m c\u7843  ph\u7847 n login \u273 \u7875  ch\u7855 c ch\u7855 n khi login xong th\'ec users m\u7899 i c\'f3 th\u7875  l\u7845 y \u273 \u432 \u7907 c th\'f4ng tin c\u7911 a c\'e1c APIs(products(POST), products/\{id\}(PATCH, DELETE), orders(GET, POST), orders/\{id\}(GET, DELETE))\
+\
+Nh\uc0\u432 ng v\u7845 n \u273 \u7873  login s\u7869  \u273 \u432 \u7907 c \u273 \u7873  c\u7853 p \u7903  c\'e1c b\'e0i sau, ch\'fang ta s\u7869  l\'e0m t\u7915 ng b\u432 \u7899 c 1. \
+\uc0\u272 \u7847 u ti\'ean c\'e1c b\u7841 n b\u7853 t terminal mkdir(windown th\'ec c\u361 ng t\u432 \u417 ng t\u7921 ) mkdir note-rest-shop\
+cd node-rest-shop\
+Ti\uc0\u7871 p theo c\'e1c b\u7841 n c\u7847 n c\'e0i \u273 \u7863 t Node, t\u7921  l\'ean google t\'ecm nh\'e9\
+nmp init\
+ti\uc0\u7871 p theo c\'e1c b\u7841 n \u273 i\u7873 n c\'e1c th\'f4ng tin c\u7847 n thi\u7871 t ho\u7863 c c\u7913  \u273 \u7875  m\u7863 c \u273 \u7883 nh r\u7891 i \u7845 n enter th\'f4i\
+v\'e0 cu\uc0\u7889 i c\'f9ng g\'f5 yes k\u7871 t th\u7913 c.\
+Ti\uc0\u7871 p theo c\'e1c b\u7841 n m\u7903  folder v\u7915 a t\u7841 o, \u7903  \u273 \'e2y m\'ecnh d\'f9ng ATOM\
+C\'e1c b\uc0\u7841 n c\'f3 th\u7875  th\u7845 y file package.json, nh\u432  b\u7841 n c\'f3 th\u7875  th\u7845 y th\'ec c\'e1c thu\u7897 c t\'ednh \u7903  \u273 \'e2y c\u361 ng gi\u7889 ng nh\u432  nh\u7919 ng th\'f4ng tin l\'fac n\'e3y b\u7841 n \u273 i\u7875 n th\'f4i.\
+Ti\uc0\u7871 p theo c\'e1c b\u7841 n b\u7853 t l\u7841 i terminal  npm install \'97save express\
+\uc0\u7902  \u273 \'e2y t\'f4i s\u7917  d\u7909 ng express \u273 \u7875  vi\u7879 c t\u7841 o ra RESTFul API d\u7877  d\'e0ng h\u417 n\
+Ti\uc0\u7871 p theo t\'f4i t\u7841 o server,js, file n\'e0y s\u7869  ch\u7913 a c\'e1c \u273 o\u7841 n m\'e3 javascript ph\u7847 n t\u7841 o server \u7903  \u273 \'e2y\
+\
+//port m\'e0 server run\
+//c\uc0\u7847 n 1 listerner\
+//listen tr\'ean port n\'e0y\
+\
+Th\'eam 1 file m\uc0\u7899 i app.js: V\u7899 i nhi\u7879 m v\u7909  handle request\
+//use c\uc0\u361 ng gi\u7889 ng nh\u432  1 middleware khi server nh\u7853 n request th\'ec n\'f3 s\u7869  ch\u7841 y qua \u273 \'e2y \u273 \u7875  thao t\'e1c m\u7897 t s\u7889  logic g\'ec \u273 \'f3\
+//next \uc0\u7903  \u273 \'e2y l\'e0 1 function \u273 \u432 \u7907 c g\u7885 i khi handle request, \u7903  \u273 \'e2y c\'e1c b\u7841 n c\'f3 th\u7875  s\u7917  l\'fd request ho\u7863 c thao t\'e1c v\u7899 i response tr\u432 \u7899 c khi tr\u7843  v\u7873 .\
+\
+\uc0\u7902  \u273 \'e2y t\'f4i s\u7869  send l\u7841 i m\u7897 t json nh\u432  sau\
+\
+v\'e0 cu\uc0\u7889 i c\'f9ng export n\'f3\
+\
+qu\uc0\u7843 y tr\u7903  l\u7841 i file server.js\
+import app nh\uc0\u432  sau:\
+\
+v\'e0o g\'e1n app cho listener\
+Ti\uc0\u7871 p theo ch\'fang ta s\u7869  th\u7917  g\u7917 i m\u7897 t GET request t\u7899 i server xem sao\
+\uc0\u272 \u7847 u ti\'ean th\'ec ch\'fang ta s\u7869  c\u7847 n b\u7853 t server\
+\
+Nh\uc0\u432 ng t\u7841 i sao b\u7853 t r\u7891 i m\'e0 n\'f3 kh\'f4ng hi\u7879 n l\'ean g\'ec, th\'ec \u273 \'fang v\u7853 y server b\u7853 t r\u7891 i nh\u432 ng n\'f3 ch\u432 a c\'f3 request \u273 \u7871 n, \u7903  \u273 \'e2y ch\'fang ta s\u7869  t\u7841 o th\u7917  request b\u7857 ng c\'e1ch g\'f5 localhost:3000 l\'ean tr\'ecnh duy\u7879 t \u273 \u7875  xem k\u7871 t qu\u7843 \
+C\'e1c b\uc0\u7841 n th\u7917  c\'e0i POSTMAN nh\'e9 v\'ec \u7903  c\'e1c b\'e0i ti\u7871 p theo \u273 \u7875  thu\u7853 n ti\u7879 n cho vi\u7879 c t\u7841 o c\'e1c requests m\'ecnh s\u7869  d\'f9ng POSTMAN}

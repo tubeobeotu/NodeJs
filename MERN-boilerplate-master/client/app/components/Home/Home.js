@@ -37,31 +37,31 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    const token = getFromStorage('the_main_app')
-    if(token){
-      fetch('/api/account/verify?token=' + token)
-        .then(res => res.json())
-        .then(json => {
-          console.log('1231212331');
-          if(json.sucess){
-            this.setState({
-              token,
-              isLoading: false
-            });
-          }else{
-            this.setState({
-              isLoading: false
-            });
-          }
+    const obj = getFromStorage('the_main_app')
+    if(obj && obj.token){
+      const { token } = obj;
+        fetch('/api/account/verify?token=' + token)
+          .then(res => res.json())
+          .then(json => {
+            console.log('1231212331');
+            if(json.sucess){
+              this.setState({
+                token,
+                isLoading: false
+              });
+            }else{
+              this.setState({
+                isLoading: false
+              });
+            }
 
+          });
+      }else{
+        this.setState({
+            isLoading: false
         });
-    }else{
-      this.setState({
-          isLoading: false
-      });
+      }
     }
-  }
-
 
   render() {
     const {
@@ -94,7 +94,7 @@ class Home extends Component {
             </div>
             <div>
               {
-                (signUpError) ? (<p>{signInError}</p>) : (null)
+                (signUpError) ? (<p>{signUpError}</p>) : (null)
               }
               <p>Sign Up</p>
               <input type='text' placeholder='FirstName' value={signUpFirstName} onChange={this.onTextboxChangeSignUpFirstName} /><br />
@@ -149,13 +149,57 @@ class Home extends Component {
             signUpLastName: ''
           });
         }else {
-
+          this.setState({
+            signUpError: json.message,
+            isLoading: false
+          });
         }
       });
   }
 
   onSignIn(){
+    const {
+      signInFirstName,
+      signInLastName,
+      signInEmail,
+      signInPassword
+    } = this.state;
 
+    this.setState({
+      isLoading: true
+    });
+
+    fetch('/api/account/signin', {  method: 'POST',
+                              headers: {
+                                'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify({
+                                firstName: signInFirstName,
+                                lastName: signInLastName,
+                                email: signInEmail,
+                                password: signInPassword
+                              }), })
+      .then(res => res.json())
+      .then(json => {
+        console.log(json.message);
+        if(json.sucess){
+          setInStorage('the_main_app', { token: json.token });
+          this.setState({
+            signInError: json.message,
+            isLoading: false,
+            signInEmail: '',
+            signInPassword: '',
+            signInFirstName: '',
+            signInLastName: '',
+            token: json.token
+          });
+        }else {
+          this.setState({
+            signInError: json.message,
+            isLoading: false
+          });
+        }
+      });
   }
 
 
